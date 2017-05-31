@@ -23,6 +23,13 @@ public class TestJERKSONParser {
         parser.parseLine(line);
     }
 
+    @Test (expected = LineFormatException.class)
+    public void emptyStringParseLineTest() throws LineFormatException {
+        String line = "";
+
+        parser.parseLine(line);
+    }
+
     @Test
     public void normalParseLineTest() throws LineFormatException {
         String line = "name:milk;price:3.35;type:food;expiration:5/31/17";
