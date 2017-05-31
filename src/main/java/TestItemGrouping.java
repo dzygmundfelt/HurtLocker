@@ -12,4 +12,14 @@ public class TestItemGrouping {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void nameToRegexTest() {
+        ItemGrouping grouping = new ItemGrouping(new Item("flour", "3.22", "food", "sometime"));
+        String expected = "[Ff][Ll][0Oo][Uu][Rr]";
+
+        String actual = grouping.getNameRegex();
+
+        Assert.assertEquals(expected, actual);
+    }
+
 }

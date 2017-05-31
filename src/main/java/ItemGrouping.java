@@ -39,6 +39,10 @@ public class ItemGrouping {
         nameRegex = sb.toString();
     }
 
+    String getNameRegex() {
+        return nameRegex;
+    }
+
     int getTotalcount() {
         int count = 0;
         for(Integer i : counts) {
