@@ -22,4 +22,26 @@ public class TestItemGrouping {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void belongsInGroupTrueTest() {
+        ItemGrouping grouping = new ItemGrouping(new Item("flour", "3.22", "food", "sometime"));
+        Item item = new Item("FloUR", "3.11", "food", "eventually");
+
+        boolean result = grouping.belongsInGroup(item);
+
+        Assert.assertTrue(result);
+    }
+
+    @Test
+    public void belongsInGroupFalseTest() {
+        ItemGrouping grouping = new ItemGrouping(new Item("flour", "3.22", "food", "sometime"));
+        Item item = new Item("bread", "3.11", "food", "eventually");
+
+        boolean result = grouping.belongsInGroup(item);
+
+        Assert.assertFalse(result);
+    }
+
+
+
 }

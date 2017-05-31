@@ -1,14 +1,15 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Receipt {
-    ArrayList<Item> items;
-    ArrayList<String> errors;
-    ArrayList<ItemGrouping> groupings;
+    List<Item> items;
+    List<String> errors;
+    List<ItemGrouping> groupings;
 
     Receipt() {
-        items = new ArrayList<Item>();
-        errors = new ArrayList<String>();
-        groupings = new ArrayList<ItemGrouping>();
+        items = new ArrayList<>();
+        errors = new ArrayList<>();
+        groupings = new ArrayList<>();
     }
 
     void addError(String string) {

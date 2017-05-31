@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public class ItemGrouping {
 
     private String name;
-    private TreeMap<String, Integer> map;
+    private Map<String, Integer> map;
     private int totalCount;
     private String nameRegex;
 
