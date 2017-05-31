@@ -29,6 +29,9 @@ public class ItemGrouping {
         char[] chars = name.toCharArray();
         for(int i = 0; i < chars.length; i++) {
             sb.append("[");
+            if(chars[i] == 'o' || chars[i] == 'O') {
+                sb.append(0);
+            }
             sb.append(Character.toUpperCase(chars[i]));
             sb.append(Character.toLowerCase(chars[i]));
             sb.append("]");
