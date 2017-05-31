@@ -16,12 +16,21 @@ public class JERKSONParser {
         Pattern p = Pattern.compile("([a-zA-Z0-9.@!;:%^&*(/]+)##");
         Matcher m = p.matcher(input);
         while(m.find()) {
-            parseLine(m.group(1));
+            try {
+                parseLine(m.group(1));
+            } catch(LineFormatException lfe) {
+                receipt.addError(m.group(1));
+            }
         }
     }
 
-    void parseLine(String line) {
-        //try to parse {create new Item}, catch an error {incrementErrors}
+    void parseLine(String line) throws LineFormatException {
+        String[] itemFields = new String[fieldRegex.length];
+        for(int i = 0; i < fieldRegex.length; i++) {
+            Pattern p = Pattern.compile("(" + fieldRegex[i] + "):([a-zA-Z/.0-9])*[;!@$%^*&]?");
+            Matcher m = p.matcher(line);
+        }
+
         //while m.find() some pattern, examine pattern
         //
 

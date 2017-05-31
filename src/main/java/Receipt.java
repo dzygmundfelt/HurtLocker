@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 
 public class Receipt {
     Item[] items;
-    private int errors;
+    private ArrayList<String> errors;
 
-    public void incrementErrors() {
-        errors++;
+    void addError(String string) {
+        errors.add(string);
     }
 
 

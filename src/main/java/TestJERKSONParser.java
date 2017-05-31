@@ -14,7 +14,7 @@ public class TestJERKSONParser {
     public void lineNotValidTest() throws LineFormatException {
         String line = "name:9090;name";
 
-        JERKSONParser.parseLine(line);
+        parser.parseLine(line);
     }
 
     @Test
