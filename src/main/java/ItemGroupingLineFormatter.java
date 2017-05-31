@@ -1,4 +1,4 @@
-public class ItemGroupingLineFormatter {
+class ItemGroupingLineFormatter {
 
     private ItemGroupingLineFormatter() {}
 
