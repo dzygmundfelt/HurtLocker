@@ -4,7 +4,7 @@ public class TestItemGrouping {
 
     @Test
     public void toFirstLetterUpperCaseTest() {
-        String string = "abcDeF";
+        String string = "abcdef";
         String expected = "Abcdef";
 
         String actual = ItemGrouping.toFirstLetterUpperCase(string);
