@@ -1,5 +1,4 @@
 import org.apache.commons.io.IOUtils;
-import java.io.IOException;
 
 public class Main {
 
@@ -12,6 +11,8 @@ public class Main {
     public static void main(String[] args) throws Exception{
         String output = (new Main()).readRawDataToString();
         System.out.println(output);
-
+        JERKSONParser parser = new JERKSONParser();
+        parser.parseInputToItems(output);
+        System.out.println(parser.receipt.printSummary());
     }
 }
