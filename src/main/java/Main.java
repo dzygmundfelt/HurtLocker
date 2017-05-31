@@ -18,7 +18,6 @@ public class Main {
         System.out.println(output);
         JERKSONParser parser = new JERKSONParser();
         parser.parseInputToItems(output);
-        System.out.println(parser.receipt.printSummary());
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream("putthehurtinonthehurtlocker.txt"), "utf-8"))) {
             writer.write(parser.receipt.printSummary());

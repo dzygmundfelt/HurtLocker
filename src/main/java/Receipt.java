@@ -28,6 +28,7 @@ public class Receipt {
         for(ItemGrouping group: groupings) {
             sb.append(group.groupingToString());
         }
+        sb.append("\n");
         sb.append(printErrors());
         return sb.toString();
     }

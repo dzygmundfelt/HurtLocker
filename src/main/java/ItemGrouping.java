@@ -10,7 +10,9 @@ public class ItemGrouping {
 
     ItemGrouping(Item item) {
         prices = new LinkedList<String>();
+        prices.add(item.getPrice());
         counts = new LinkedList<Integer>();
+        counts.add(1);
         name = toFirstLetterUpperCase(item.getName());
         nameToRegex();
     }
