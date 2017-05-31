@@ -1,14 +1,14 @@
-name:      milk		seen:   6 times
+name:      Milk		seen:   6 times
 ===============		===============
 price:     1.23		seen:   1 times
 ---------------		---------------
 price:     3.23		seen:   5 times
 		
-name:     bread		seen:   6 times
+name:     Bread		seen:   6 times
 ===============		===============
 price:     1.23		seen:   6 times
 		
-name:   cookies		seen:   8 times
+name:   Cookies		seen:   8 times
 ===============		===============
 price:     2.25		seen:   8 times
 		

@@ -13,13 +13,13 @@ public class ItemGrouping {
         map = new TreeMap<>();
         map.put(item.getPrice(), 1);
         totalCount = 1;
-        name = toFirstLetterUpperCase(item.getName());
+        name = toFirstLetterUpperCase(item.getName().toLowerCase());
         setNameRegex();
     }
 
     public static String toFirstLetterUpperCase(String string) {
         String firstChar = new Character(string.charAt(0)).toString();
-        return string.toLowerCase().replaceFirst(firstChar, firstChar.toUpperCase());
+        return string.replaceFirst(firstChar, firstChar.toUpperCase());
     }
 
     void setNameRegex() {
