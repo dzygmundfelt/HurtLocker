@@ -24,7 +24,7 @@ public class TestItemGroupingLineFormatter {
     public void itemLineTest() {
         String expected = "name:  a house\t\tseen:  9 times\n";
 
-        String actual = ItemGroupingLineFormatter.itemLine(12, "a house", 9);
+        String actual = ItemGroupingLineFormatter.itemLine(12, "a house", "name", 9);
 
         Assert.assertEquals(expected, actual);
     }

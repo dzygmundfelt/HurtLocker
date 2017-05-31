@@ -29,9 +29,7 @@ public class Receipt {
         StringBuilder sb = new StringBuilder();
         for(ItemGrouping group: groupings) {
             sb.append(group.groupingToString(maxItemNameLength + 8));
-            sb.append("\n");
         }
-        sb.append("\n");
         sb.append(printErrors());
         return sb.toString();
     }

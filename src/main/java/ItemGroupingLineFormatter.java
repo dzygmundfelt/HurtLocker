@@ -6,9 +6,9 @@ final class ItemGroupingLineFormatter {
     private ItemGroupingLineFormatter() {
     }
 
-    static String itemLine(int columnWidth, String itemName, int totalCount) {
+    static String itemLine(int columnWidth, String itemName, String label, int totalCount) {
         int width = columnWidth/2;
-        return String.format("%-" + width + "s %" + width + "s\t\t%-" + width + "s %" + width + "s\n", "name: ", itemName, "seen: ", totalCount + " times");
+        return String.format("%-" + width + "s %" + width + "s\t\t%-" + width + "s %" + width + "s\n", label + ": ", itemName, "seen: ", totalCount + " times");
     }
 
     static String printBarrier(int columnWidth, String borderChar) {

@@ -56,13 +56,26 @@ public class ItemGrouping {
         totalCount++;
     }
 
+    String[] getBorderChars() {
+        String[] borderChars = new String[map.entrySet().size() + 1];
+        borderChars[0] = "=";
+        for(int i = 1; i < borderChars.length - 1; i++) {
+            borderChars[i] = "-";
+        }
+        borderChars[borderChars.length - 1] = "";
+        return borderChars;
+    }
+
     String groupingToString(int columnWidth) {
         StringBuilder sb = new StringBuilder();
-        sb.append(ItemGroupingLineFormatter.itemLine(columnWidth, name, totalCount));
-        sb.append(ItemGroupingLineFormatter.printBarrier(columnWidth, "="));
+        String[] borderChars = getBorderChars();
+        int i = 0;
+        sb.append(ItemGroupingLineFormatter.itemLine(columnWidth, name, "name", totalCount));
+        sb.append(ItemGroupingLineFormatter.printBarrier(columnWidth, borderChars[i]));
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            sb.append(ItemGroupingLineFormatter.itemLine(columnWidth, entry.getKey(), entry.getValue()));
-            sb.append(ItemGroupingLineFormatter.printBarrier(columnWidth, "-"));
+            i++;
+            sb.append(ItemGroupingLineFormatter.itemLine(columnWidth, entry.getKey(), "price", entry.getValue()));
+            sb.append(ItemGroupingLineFormatter.printBarrier(columnWidth, borderChars[i]));
         }
         return sb.toString();
     }

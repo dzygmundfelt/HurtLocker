@@ -1,28 +1,23 @@
-name:      Milk		seen:   6 times
+name:      milk		seen:   6 times
 ===============		===============
-name:      1.23		seen:   1 times
+price:     1.23		seen:   1 times
 ---------------		---------------
-name:      3.23		seen:   5 times
----------------		---------------
-
-name:     Bread		seen:   6 times
+price:     3.23		seen:   5 times
+		
+name:     bread		seen:   6 times
 ===============		===============
-name:      1.23		seen:   6 times
----------------		---------------
-
-name:   Cookies		seen:   8 times
+price:     1.23		seen:   6 times
+		
+name:   cookies		seen:   8 times
 ===============		===============
-name:      2.25		seen:   8 times
----------------		---------------
-
+price:     2.25		seen:   8 times
+		
 name:    Apples		seen:   4 times
 ===============		===============
-name:      0.23		seen:   2 times
+price:     0.23		seen:   2 times
 ---------------		---------------
-name:      0.25		seen:   2 times
----------------		---------------
-
-
+price:     0.25		seen:   2 times
+		
 There were 4 errors. Error lines listed below.
 naMe:;price:3.23;type:Food;expiration:1/04/2016
 naMe:MiLK;priCe:;type:Food;expiration:1/11/2016
