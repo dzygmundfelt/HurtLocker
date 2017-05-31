@@ -17,13 +17,9 @@ public class ItemGrouping {
         setNameRegex();
     }
 
-    static String toFirstLetterUpperCase(String string) {
-        char[] chars = string.toCharArray();
-        chars[0] = Character.toUpperCase(chars[0]);
-        for (int i = 1; i < chars.length; i++) {
-            chars[i] = Character.toLowerCase(chars[i]);
-        }
-        return new String(chars);
+    public static String toFirstLetterUpperCase(String string) {
+        String firstChar = new Character(string.charAt(0)).toString();
+        return string.toLowerCase().replaceFirst(firstChar, firstChar.toUpperCase());
     }
 
     void setNameRegex() {
