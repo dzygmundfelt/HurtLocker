@@ -1,18 +1,18 @@
-import java.util.LinkedList;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Pattern;
 
 public class ItemGrouping {
 
     private String name;
-    private LinkedList<String> prices;
-    private LinkedList<Integer> counts;
+    private TreeMap<String, Integer> map;
+    private int totalCount;
     private String nameRegex;
 
     ItemGrouping(Item item) {
-        prices = new LinkedList<String>();
-        prices.add(item.getPrice());
-        counts = new LinkedList<Integer>();
-        counts.add(1);
+        map = new TreeMap<>();
+        map.put(item.getPrice(), 1);
+        totalCount = 1;
         name = toFirstLetterUpperCase(item.getName());
         nameToRegex();
     }
@@ -45,35 +45,27 @@ public class ItemGrouping {
         return nameRegex;
     }
 
-    int getTotalcount() {
-        int count = 0;
-        for (Integer i : counts) {
-            count += i;
-        }
-        return count;
-    }
-
     boolean belongsInGroup(Item item) {
         return item.getName().length() == name.length()
                 && Pattern.matches(nameRegex, item.getName());
     }
 
     void addToGrouping(Item item) {
-        int index = prices.indexOf(item.getPrice());
-        if (index == -1) {
-            prices.add(item.getPrice());
-            counts.add(1);
+        Integer value = map.get(item.getPrice());
+        if(value == null) {
+            map.put(item.getPrice(), 1);
         } else {
-            counts.set(index, counts.get(index) + 1);
+            map.put(item.getPrice(), value + 1);
         }
+        totalCount++;
     }
 
     String groupingToString(int columnWidth) {
         StringBuilder sb = new StringBuilder();
-        sb.append(ItemGroupingLineFormatter.itemLine(columnWidth, name, getTotalcount()));
+        sb.append(ItemGroupingLineFormatter.itemLine(columnWidth, name, totalCount));
         sb.append(ItemGroupingLineFormatter.printBarrier(columnWidth, "="));
-        for (int i = 0; i < prices.size(); i++) {
-            sb.append(ItemGroupingLineFormatter.itemLine(columnWidth, prices.get(i), counts.get(i)));
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            sb.append(ItemGroupingLineFormatter.itemLine(columnWidth, entry.getKey(), entry.getValue()));
             sb.append(ItemGroupingLineFormatter.printBarrier(columnWidth, "-"));
         }
         return sb.toString();
