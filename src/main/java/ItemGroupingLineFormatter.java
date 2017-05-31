@@ -1,3 +1,6 @@
+import java.util.stream.Stream;
+import static java.util.stream.Collectors.joining;
+
 final class ItemGroupingLineFormatter {
 
     private ItemGroupingLineFormatter() {
@@ -8,16 +11,16 @@ final class ItemGroupingLineFormatter {
         return String.format("%-" + width + "s %" + width + "s\t\t%-" + width + "s %" + width + "s\n", "name: ", itemName, "seen: ", totalCount + " times");
     }
 
-    static String printBarrier(int columnWidth, char character) {
+    static String printBarrier(int columnWidth, String borderChar) {
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < columnWidth; i++) {
-            sb.append(character);
-        }
+        sb.append(repeat(columnWidth, borderChar));
         sb.append("\t\t");
-        for(int i = 0; i < columnWidth; i++) {
-            sb.append(character);
-        }
+        sb.append(repeat(columnWidth, borderChar));
         sb.append("\n");
         return sb.toString();
+    }
+
+    static String repeat(int times, String borderChar) {
+        return Stream.generate(() -> borderChar).limit(times).collect(joining());
     }
 }

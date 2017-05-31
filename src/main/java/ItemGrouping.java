@@ -71,10 +71,10 @@ public class ItemGrouping {
     String groupingToString(int columnWidth) {
         StringBuilder sb = new StringBuilder();
         sb.append(ItemGroupingLineFormatter.itemLine(columnWidth, name, getTotalcount()));
-        sb.append(ItemGroupingLineFormatter.printBarrier(columnWidth, '='));
+        sb.append(ItemGroupingLineFormatter.printBarrier(columnWidth, "="));
         for (int i = 0; i < prices.size(); i++) {
             sb.append(ItemGroupingLineFormatter.itemLine(columnWidth, prices.get(i), counts.get(i)));
-            sb.append(ItemGroupingLineFormatter.printBarrier(columnWidth, '-'));
+            sb.append(ItemGroupingLineFormatter.printBarrier(columnWidth, "-"));
         }
         return sb.toString();
     }
