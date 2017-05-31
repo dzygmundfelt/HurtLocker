@@ -1,9 +1,11 @@
-class ItemGroupingLineFormatter {
+final class ItemGroupingLineFormatter {
 
-    private ItemGroupingLineFormatter() {}
+    private ItemGroupingLineFormatter() {
+    }
 
-    static String topItemLine(int columnWidth, String itemName, int totalCount) {
-        return String.format("%-" + (columnWidth)/2 + "s %" + columnWidth/2 + "s\t\t%-" + columnWidth/2 + "s %" + (columnWidth)/2 + "s\n", "name: ", itemName, "seen: ", totalCount + " times");
+    static String itemLine(int columnWidth, String itemName, int totalCount) {
+        int width = columnWidth/2;
+        return String.format("%-" + width + "s %" + width + "s\t\t%-" + width + "s %" + width + "s\n", "name: ", itemName, "seen: ", totalCount + " times");
     }
 
     static String printBarrier(int columnWidth, char character) {
@@ -17,9 +19,5 @@ class ItemGroupingLineFormatter {
         }
         sb.append("\n");
         return sb.toString();
-    }
-
-    static String printPriceLine(int columnWidth, String price, Integer integer) {
-        return String.format("%-" + (columnWidth)/2 + "s %" + columnWidth/2 + "s\t\t%-" + columnWidth/2 + "s %" + (columnWidth)/2 + "s\n", "price: ", price, "seen: ", integer + " times");
     }
 }
