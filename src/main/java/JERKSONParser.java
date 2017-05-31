@@ -27,14 +27,15 @@ public class JERKSONParser {
     void parseLine(String line) throws LineFormatException {
         String[] itemFields = new String[fieldRegex.length];
         for(int i = 0; i < fieldRegex.length; i++) {
-            Pattern p = Pattern.compile("(" + fieldRegex[i] + "):([a-zA-Z/.0-9])*[;!@$%^*&]?");
+            Pattern p = Pattern.compile("(" + fieldRegex[i] + "):([a-zA-Z/.0-9]+)[" + entryDividers + "]?");
             Matcher m = p.matcher(line);
+            if(!m.find()) {
+                throw new LineFormatException();
+            }
+            itemFields[i] = m.group(2);
         }
 
-        //while m.find() some pattern, examine pattern
-        //
-
-
+        receipt.addItem(new Item(itemFields[0], itemFields[1], itemFields[2], itemFields[3]));
     }
 
     private String getFieldValue(int fRIndex, String line) {

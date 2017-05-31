@@ -1,12 +1,12 @@
 public class Item {
 
     private String name;
-    private double price;
+    private String price;
     private String type;
     private String expiration;
 
 
-    public Item(String name, double price, String type, String expiration) {
+    public Item(String name, String price, String type, String expiration) {
         this.name = name;
         this.price = price;
         this.type = type;
@@ -17,7 +17,7 @@ public class Item {
         return name;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
@@ -29,10 +29,4 @@ public class Item {
         return expiration;
     }
 
-    public boolean equals(Item item) {
-        return this.name.equalsIgnoreCase(item.getName())
-                && this.price == item.getPrice()
-                && this.type.equalsIgnoreCase(item.getType())
-                && this.expiration.equalsIgnoreCase(item.getExpiration());
-    }
 }
