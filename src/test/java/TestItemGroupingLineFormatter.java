@@ -22,7 +22,7 @@ public class TestItemGroupingLineFormatter {
 
     @Test
     public void itemLineTest() {
-        String expected = "name:  a house\t\tseen:  9 times";
+        String expected = "name:  a house\t\tseen:  9 times\n";
 
         String actual = ItemGroupingLineFormatter.itemLine(12, "a house", 9);
 

@@ -27,7 +27,7 @@ public class TestItemGrouping {
         ItemGrouping grouping = new ItemGrouping(new Item("flour", "3.22", "food", "sometime"));
         Item item = new Item("FloUR", "3.11", "food", "eventually");
 
-        boolean result = grouping.belongsInGroup(item);
+        boolean result = grouping.canAccept(item);
 
         Assert.assertTrue(result);
     }
@@ -37,11 +37,9 @@ public class TestItemGrouping {
         ItemGrouping grouping = new ItemGrouping(new Item("flour", "3.22", "food", "sometime"));
         Item item = new Item("bread", "3.11", "food", "eventually");
 
-        boolean result = grouping.belongsInGroup(item);
+        boolean result = grouping.canAccept(item);
 
         Assert.assertFalse(result);
     }
-
-
 
 }

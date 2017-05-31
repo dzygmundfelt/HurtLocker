@@ -24,7 +24,7 @@ public class Receipt {
     This method puts the items in their groupings and prints everything.
      */
     String printSummary() {
-        toGroupings();
+        placeItemsInGroupings();
         int maxItemNameLength = getMaxItemNameLength();
         StringBuilder sb = new StringBuilder();
         for(ItemGrouping group: groupings) {
@@ -56,7 +56,7 @@ public class Receipt {
         return sb.toString();
     }
 
-    private void toGroupings() {
+    private void placeItemsInGroupings() {
         for(Item item : items) {
             if(!addToAGrouping(item)) {
                 groupings.add(new ItemGrouping(item));
@@ -66,8 +66,8 @@ public class Receipt {
 
     private boolean addToAGrouping(Item item) {
         for(ItemGrouping group : groupings) {
-            if(group.belongsInGroup(item)) {
-                group.addToGrouping(item);
+            if(group.canAccept(item)) {
+                group.add(item);
                 return true;
             }
         }

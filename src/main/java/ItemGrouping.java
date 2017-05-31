@@ -14,7 +14,7 @@ public class ItemGrouping {
         map.put(item.getPrice(), 1);
         totalCount = 1;
         name = toFirstLetterUpperCase(item.getName());
-        nameToRegex();
+        setNameRegex();
     }
 
     static String toFirstLetterUpperCase(String string) {
@@ -26,7 +26,7 @@ public class ItemGrouping {
         return new String(chars);
     }
 
-    void nameToRegex() {
+    void setNameRegex() {
         StringBuilder sb = new StringBuilder();
         char[] chars = name.toCharArray();
         for (int i = 0; i < chars.length; i++) {
@@ -45,12 +45,12 @@ public class ItemGrouping {
         return nameRegex;
     }
 
-    boolean belongsInGroup(Item item) {
+    boolean canAccept(Item item) {
         return item.getName().length() == name.length()
                 && Pattern.matches(nameRegex, item.getName());
     }
 
-    void addToGrouping(Item item) {
+    void add(Item item) {
         Integer value = map.get(item.getPrice());
         if(value == null) {
             map.put(item.getPrice(), 1);
