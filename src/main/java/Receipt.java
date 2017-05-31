@@ -24,13 +24,24 @@ public class Receipt {
      */
     String printSummary() {
         toGroupings();
+        int maxItemNameLength = getMaxItemNameLength();
         StringBuilder sb = new StringBuilder();
         for(ItemGrouping group: groupings) {
-            sb.append(group.groupingToString());
+            sb.append(group.groupingToString(maxItemNameLength + 8));
         }
         sb.append("\n");
         sb.append(printErrors());
         return sb.toString();
+    }
+
+    private int getMaxItemNameLength() {
+        int max = 0;
+        for(Item item : items) {
+            if(item.getName().length() > max) {
+                max = item.getName().length();
+            }
+        }
+        return max;
     }
 
     String printErrors() {

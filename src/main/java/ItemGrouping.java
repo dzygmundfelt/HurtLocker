@@ -68,27 +68,36 @@ public class ItemGrouping {
         }
     }
 
-    String groupingToString() {
+    String groupingToString(int columnWidth) {
         StringBuilder sb = new StringBuilder();
-
-        sb.append("name: ");
-        sb.append(name);
-        sb.append("\t\t");
-        sb.append(seenXTimes(getTotalcount()));
-        sb.append("============= \t \t =============\n");
+        sb.append(topItemLine(columnWidth));
+        sb.append(printBarrier(columnWidth, '='));
         for(int i = 0; i < prices.size(); i++) {
-            sb.append(printPrice(prices.get(i), counts.get(i)));
-            sb.append("-------------\t\t -------------\n");
+            sb.append(printPriceLine(columnWidth, prices.get(i), counts.get(i)));
+            sb.append(printBarrier(columnWidth, '-'));
         }
 
         return sb.toString();
     }
 
-    String seenXTimes(int number) {
-        return "seen : " + number + " times\n";
+    String topItemLine(int columnWidth) {
+        return String.format("%-" + (columnWidth)/2 + "s %" + columnWidth/2 + "s\t\t%-" + columnWidth/2 + "s %" + (columnWidth)/2 + "s\n", "name: ", name, "seen: ", getTotalcount() + " times");
     }
 
-    String printPrice(String price, Integer integer) {
-        return "price:\t" + price + "\t\t" + seenXTimes(integer);
+    String printBarrier(int columnWidth, char character) {
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < columnWidth; i++) {
+            sb.append(character);
+        }
+        sb.append("\t\t");
+        for(int i = 0; i < columnWidth; i++) {
+            sb.append(character);
+        }
+        sb.append("\n");
+        return sb.toString();
+    }
+
+    String printPriceLine(int columnWidth, String price, Integer integer) {
+        return String.format("%-" + (columnWidth)/2 + "s %" + columnWidth/2 + "s\t\t%-" + columnWidth/2 + "s %" + (columnWidth)/2 + "s\n", "price: ", price, "seen: ", integer + " times");
     }
 }
