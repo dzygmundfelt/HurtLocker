@@ -12,7 +12,7 @@ public class JERKSONParser {
         receipt = new Receipt();
     }
 
-    void parseInputToItems(String input) {
+    protected void parseInputToItems(String input) {
         Pattern p = Pattern.compile("([a-zA-Z0-9.@!;:%^&*(/]+)##");
         Matcher m = p.matcher(input);
         while(m.find()) {
@@ -24,7 +24,7 @@ public class JERKSONParser {
         }
     }
 
-    void parseLine(String line) throws LineFormatException {
+    protected void parseLine(String line) throws LineFormatException {
         String[] itemFields = new String[fieldRegex.length];
         for(int i = 0; i < fieldRegex.length; i++) {
             Pattern p = Pattern.compile("(" + fieldRegex[i] + "):([a-zA-Z/.0-9]+)[" + entryDividers + "]?");
@@ -36,15 +36,6 @@ public class JERKSONParser {
         }
 
         receipt.addItem(new Item(itemFields[0], itemFields[1], itemFields[2], itemFields[3]));
-    }
-
-    private String getFieldValue(int fRIndex, String line) {
-        Pattern p = Pattern.compile("(" + fieldRegex[fRIndex] + "):(\\w+)?");
-        Matcher m = p.matcher(line);
-        if(m.find()) {
-            return m.group(2);
-        }
-        return null;
     }
 
 }

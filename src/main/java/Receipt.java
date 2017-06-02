@@ -12,18 +12,18 @@ public class Receipt {
         groupings = new ArrayList<>();
     }
 
-    void addError(String string) {
+    protected void addError(String string) {
         errors.add(string);
     }
 
-    void addItem(Item item) {
+    protected void addItem(Item item) {
         items.add(item);
     }
 
     /*
     This method puts the items in their groupings and prints everything.
      */
-    String printSummary() {
+    protected String printSummary() {
         placeItemsInGroupings();
         int maxItemNameLength = getMaxItemNameLength();
         StringBuilder sb = new StringBuilder();
@@ -44,7 +44,7 @@ public class Receipt {
         return max;
     }
 
-    String printErrors() {
+    protected String printErrors() {
         StringBuilder sb = new StringBuilder();
         sb.append("There were "  + errors.size() + " errors. Error lines listed below.\n");
         for(String error : errors) {

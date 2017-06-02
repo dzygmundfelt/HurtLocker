@@ -22,7 +22,7 @@ public class ItemGrouping {
         return string.replaceFirst(firstChar, firstChar.toUpperCase());
     }
 
-    void setNameRegex() {
+    private void setNameRegex() {
         StringBuilder sb = new StringBuilder();
         char[] chars = name.toCharArray();
         for (int i = 0; i < chars.length; i++) {
@@ -37,16 +37,12 @@ public class ItemGrouping {
         nameRegex = sb.toString();
     }
 
-    String getNameRegex() {
-        return nameRegex;
-    }
-
-    boolean canAccept(Item item) {
+    protected boolean canAccept(Item item) {
         return item.getName().length() == name.length()
                 && Pattern.matches(nameRegex, item.getName());
     }
 
-    void add(Item item) {
+    protected void add(Item item) {
         Integer value = map.get(item.getPrice());
         if(value == null) {
             map.put(item.getPrice(), 1);
@@ -56,7 +52,7 @@ public class ItemGrouping {
         totalCount++;
     }
 
-    String[] getBorderChars() {
+    private String[] getBorderChars() {
         String[] borderChars = new String[map.entrySet().size() + 1];
         borderChars[0] = "=";
         for(int i = 1; i < borderChars.length - 1; i++) {
@@ -66,7 +62,7 @@ public class ItemGrouping {
         return borderChars;
     }
 
-    String groupingToString(int columnWidth) {
+    protected String groupingToString(int columnWidth) {
         StringBuilder sb = new StringBuilder();
         String[] borderChars = getBorderChars();
         int i = 0;
