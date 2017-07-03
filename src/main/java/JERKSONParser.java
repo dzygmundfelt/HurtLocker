@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -6,36 +8,37 @@ public class JERKSONParser {
     private static final String entryDividers = ";@^%*";
     private static final String[] fieldRegex = {"[nN][aA][mM][eE]","[pP][rR][iI][cC][eE]","[tT][yY][pP][eE]","[eE][xX][pP][iI][rR][aA][tT][iI][oO][nN]"};
 
-    Receipt receipt;
-
-    JERKSONParser() {
-        receipt = new Receipt();
+    private static Matcher getMatcher(String pattern, String input) {
+        Pattern p = Pattern.compile(pattern);
+        return p.matcher(input);
     }
 
-    protected void parseInputToItems(String input) {
-        Pattern p = Pattern.compile("([a-zA-Z0-9.@!;:%^&*(/]+)##");
-        Matcher m = p.matcher(input);
+    protected static String parseInputToReceipt(String input) {
+        List<Item> items = new ArrayList<>();
+        List<String> errors = new ArrayList<>();
+        Matcher m = getMatcher("([a-zA-Z0-9.@!;:%^&*(/]+)##", input);
         while(m.find()) {
             try {
-                parseLine(m.group(1));
+                items.add(parseLine(m.group(1)));
             } catch(LineFormatException lfe) {
-                receipt.addError(m.group(1));
+                errors.add(m.group(1));
             }
         }
+        return Receipt.printSummary(items, errors);
     }
 
-    protected void parseLine(String line) throws LineFormatException {
+    protected static Item parseLine(String line) throws LineFormatException {
         String[] itemFields = new String[fieldRegex.length];
+
         for(int i = 0; i < fieldRegex.length; i++) {
-            Pattern p = Pattern.compile("(" + fieldRegex[i] + "):([a-zA-Z/.0-9]+)[" + entryDividers + "]?");
-            Matcher m = p.matcher(line);
+            Matcher m = getMatcher("(" + fieldRegex[i] + "):([a-zA-Z/.0-9]+)[" + entryDividers + "]?", line);
             if(!m.find()) {
                 throw new LineFormatException();
             }
             itemFields[i] = m.group(2);
         }
 
-        receipt.addItem(new Item(itemFields[0], itemFields[1], itemFields[2], itemFields[3]));
+        return new Item(itemFields[0], itemFields[1], itemFields[2], itemFields[3]);
     }
 
 }

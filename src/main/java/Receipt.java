@@ -2,39 +2,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Receipt {
-    List<Item> items;
-    List<String> errors;
-    List<ItemGrouping> groupings;
 
-    Receipt() {
-        items = new ArrayList<>();
-        errors = new ArrayList<>();
-        groupings = new ArrayList<>();
-    }
-
-    protected void addError(String string) {
-        errors.add(string);
-    }
-
-    protected void addItem(Item item) {
-        items.add(item);
-    }
-
-    /*
-    This method puts the items in their groupings and prints everything.
-     */
-    protected String printSummary() {
-        placeItemsInGroupings();
-        int maxItemNameLength = getMaxItemNameLength();
+    protected static String printSummary(List<Item> items, List<String> errors) {
+        List<ItemGrouping> groupings = placeItemsInGroupings(items);
+        int maxItemNameLength = getMaxItemNameLength(items);
         StringBuilder sb = new StringBuilder();
         for(ItemGrouping group: groupings) {
             sb.append(group.groupingToString(maxItemNameLength + 8));
         }
-        sb.append(printErrors());
+        sb.append(printErrors(errors));
         return sb.toString();
     }
 
-    private int getMaxItemNameLength() {
+    private static int getMaxItemNameLength(List<Item> items) {
         int max = 0;
         for(Item item : items) {
             if(item.getName().length() > max) {
@@ -44,7 +24,7 @@ public class Receipt {
         return max;
     }
 
-    protected String printErrors() {
+    protected static String printErrors(List<String> errors) {
         StringBuilder sb = new StringBuilder();
         sb.append("There were "  + errors.size() + " errors. Error lines listed below.\n");
         for(String error : errors) {
@@ -54,15 +34,17 @@ public class Receipt {
         return sb.toString();
     }
 
-    private void placeItemsInGroupings() {
+    protected static List<ItemGrouping> placeItemsInGroupings(List<Item> items) {
+        List<ItemGrouping> groupings = new ArrayList<>();
         for(Item item : items) {
-            if(!addToAGrouping(item)) {
+            if(!addToAGrouping(item, groupings)) {
                 groupings.add(new ItemGrouping(item));
             }
         }
+        return groupings;
     }
 
-    private boolean addToAGrouping(Item item) {
+    private static boolean addToAGrouping(Item item, List<ItemGrouping> groupings) {
         for(ItemGrouping group : groupings) {
             if(group.canAccept(item)) {
                 group.add(item);
