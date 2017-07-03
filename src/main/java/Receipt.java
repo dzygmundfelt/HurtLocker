@@ -3,12 +3,13 @@ import java.util.List;
 
 public class Receipt {
 
+    private Receipt() {}
+
     protected static String printSummary(List<Item> items, List<String> errors) {
         List<ItemGrouping> groupings = placeItemsInGroupings(items);
-        int maxItemNameLength = getMaxItemNameLength(items);
         StringBuilder sb = new StringBuilder();
         for(ItemGrouping group: groupings) {
-            sb.append(group.groupingToString(maxItemNameLength + 8));
+            sb.append(group.groupingToString(getMaxItemNameLength(items) + 8));
         }
         sb.append(printErrors(errors));
         return sb.toString();

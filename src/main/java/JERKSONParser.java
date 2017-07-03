@@ -8,6 +8,8 @@ public class JERKSONParser {
     private static final String entryDividers = ";@^%*";
     private static final String[] fieldRegex = {"[nN][aA][mM][eE]","[pP][rR][iI][cC][eE]","[tT][yY][pP][eE]","[eE][xX][pP][iI][rR][aA][tT][iI][oO][nN]"};
 
+    private JERKSONParser() {}
+
     private static Matcher getMatcher(String pattern, String input) {
         Pattern p = Pattern.compile(pattern);
         return p.matcher(input);
